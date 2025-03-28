@@ -14,6 +14,6 @@ class Employee:
         return "Заробітна плата Іван : 50000"
 
 
-# Примеры
+
 print(Car("Toyota", "Corola", 2020).get_info())
 print(Employee("Іван", "Менеджер", 50000).get_salary_info())
