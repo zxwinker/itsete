@@ -1,15 +1,54 @@
-def get_grade(score):
-    if 0 <= score <= 49:
-        return "незадовільно"
-    elif 50 <= score <= 69:
-        return "задовільно"
-    elif 70 <= score <= 89:
-        return "добре"
-    elif 90 <= score <= 100:
-        return "відмінно"
-    else:
-        return "число від 0 до 100."
+import random
 
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.knowedge = 50
+        self.energy = 100
+        self.money = 500
+        self.days = 365
 
-score = int(input("Введіть кількість: "))
-print(f"Ваша оцінка: {get_grade(score)}")
+    def study(self):
+        if self.energy >= 20:
+            self.knowedge += random.randint(5, 15)
+            self.energy -= random.randint(10, 20)
+            print("Студент вчиться.")
+            print("Знання:", self.knowedge, "Енергія:", self.energy)
+        else:
+            print("Студент втомлений щоб вчитися")
+
+    def work(self):
+        self.money += random.randint(50, 150)
+        self.energy -= random.randint(10, 30)
+        print("Студент працює.")
+        print("Гроші:", self.money, "Енергія:", self.energy)
+
+    def rest(self):
+        if self.money >= 50:
+            self.energy += random.randint(20, 40)
+            self.money -= random.randint(30, 50)
+            print("Студент відпочиває.")
+            print("Енергія:", self.energy, "Гроші:", self.money)
+        else:
+            print("Студент не має грошей для відпочинку!")
+
+    def live_one_day(self):
+        if self.knowedge < 40:
+            self.study()
+        elif self.money < 100:
+            self.work()
+        elif self.energy < 30:
+            self.rest()
+        else:
+            random.choice([self.study, self.work, self.rest])()
+
+    def live_a_year(self):
+        for day in range(1, self.days + 1):
+            print("День", day)
+            self.live_one_day()
+
+        print("Рік завершено! Підсумки:")
+        print("Знання:", self.knowedge, "Енергія:", self.energy, "Гроші:", self.money)
+
+student = Student("Олександр")
+student.live_a_year()
